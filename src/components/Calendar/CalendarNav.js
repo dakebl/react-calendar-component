@@ -9,7 +9,7 @@ const CalendarNav = (props) => {
     <div id="calendar-navigation" className="navigation">
       
       <div className="nav-left">
-        <a onClick={ props.decrementMonth }>
+        <a className="decrement" onClick={ props.decrementMonth }>
           <i className="fa fa-chevron-left" aria-hidden="true"></i>
         </a>      
       </div>
@@ -22,7 +22,7 @@ const CalendarNav = (props) => {
           )}    
         </select>
         
-        <select className="year-select" value={props.current.format('Y')} onChange={ (event) => props.changeYear(event.target.value) }>   
+        <select className="increment" className="year-select" value={props.current.format('Y')} onChange={ (event) => props.changeYear(event.target.value) }>   
           {[...Array(200).keys()].map(year => 
             <option key={1950 + year} value={1950 + year}>{1950 + year}</option>
           )}

@@ -15,7 +15,7 @@ class Calendar extends React.Component {
 
     this.state = {
       today: today,
-      current: this.buildUrl(today.clone()),
+      current: this.processURL(today.clone()),
       dates: []
     };
 
@@ -29,7 +29,7 @@ class Calendar extends React.Component {
     this.generateDates();
   }
 
-  buildUrl(today) {
+  processURL(today) {
           
     let urlData = this.props.match;
     let selectedDate;
@@ -38,10 +38,8 @@ class Calendar extends React.Component {
       selectedDate = today.clone();
     } else if (urlData.path === '/:year') {
       selectedDate = moment(urlData.params.year, `YYYY`); 
-      this.setUrl(selectedDate);          
     } else {
       selectedDate = moment(urlData.params.year + urlData.params.month, `YYYYMM`);
-      this.setUrl(selectedDate);                
     }
 
     return selectedDate;
@@ -71,9 +69,7 @@ class Calendar extends React.Component {
   }
   
   setUrl(date) {
-    let year  = date.format(`YYYY`);
-    let month = date.format(`MM`);
-    let url = `/${year}/${month}`;
+    let url = date.format(`/YYYY/MM`);
     this.props.history.push(url);
   }
 
