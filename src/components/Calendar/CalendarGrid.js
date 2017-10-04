@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CalendarGrid = (props) => {
 
@@ -23,5 +24,9 @@ const CalendarGrid = (props) => {
     </div>
   );
 }
+
+CalendarGrid.propTypes = { 
+  dates: PropTypes.array.isRequired 
+};
 
 export default CalendarGrid;
