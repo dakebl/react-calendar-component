@@ -10,16 +10,41 @@ import CalendarGrid from './CalendarGrid';
 class Calendar extends React.Component {
   constructor(props) {
     super(props)
+    
+    let today = moment();
 
     this.state = {
-      today: moment(),
-      current: moment(),
+      today: today,
+      current: this.buildUrl(today.clone()),
       dates: []
     };
+
+    this.incrementMonth = this.incrementMonth.bind(this);    
+    this.decrementMonth = this.decrementMonth.bind(this);   
+    this.changeMonth    = this.changeMonth.bind(this);    
+    this.changeYear     = this.changeYear.bind(this);     
   }
 
   componentWillMount() {  
     this.generateDates();
+  }
+
+  buildUrl(today) {
+          
+    let urlData = this.props.match;
+    let selectedDate;
+
+    if (urlData.path === '/') {
+      selectedDate = today.clone();
+    } else if (urlData.path === '/:year') {
+      selectedDate = moment(urlData.params.year, `YYYY`); 
+      this.setUrl(selectedDate);          
+    } else {
+      selectedDate = moment(urlData.params.year + urlData.params.month, `YYYYMM`);
+      this.setUrl(selectedDate);                
+    }
+
+    return selectedDate;
   }
 
   generateDates() {
@@ -55,7 +80,7 @@ class Calendar extends React.Component {
   updateMonthView(newMonth) {
     this.setState({ current: newMonth }); 
     this.setUrl(newMonth);
-    this.generateGrid();
+    this.generateDates();
   }
 
   incrementMonth() {
@@ -75,9 +100,7 @@ class Calendar extends React.Component {
 
   changeMonth(month) {
     let newMonth = this.state.current.month(month-1);
-    this.setState({ current: newMonth });  
-    this.setUrl(newMonth);
-    this.generateGrid();
+    this.updateMonthView(newMonth)
   }
 
   changeYear(year) {

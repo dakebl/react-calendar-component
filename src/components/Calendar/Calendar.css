@@ -1,5 +1,42 @@
 @import '~font-awesome/css/font-awesome.css';
 
+/* CalendarNav Styles */
+.navigation {
+  display: flex;    
+  font-size: 20px;
+  padding: 10px;
+  background: #3979D8;
+  box-shadow: -1px -1px #424242, 
+  inset -1px -1px 0 0 #424242;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-left {
+  text-align: left;
+}
+
+.nav-right {
+  text-align: right;
+}
+
+.nav-center select {
+  color: #ffffff;
+  font-size: 20px;
+  border: none;
+  background: transparent;
+  text-align: center;
+}
+
+.nav-center select option,
+.nav-center select option:focus,
+.nav-center select option:hover,
+.nav-center select option:active {
+  color: #000;
+  border: none;
+}
+
+/* CalendarGrid Styles */
 .week {
   display: flex;
   height: 80px;
