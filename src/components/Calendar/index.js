@@ -2,6 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/en-gb';
 
+import './Calendar.css';
+
 import CalendarNav from './CalendarNav';
 import CalendarGrid from './CalendarGrid';
 
@@ -48,7 +50,7 @@ class Calendar extends React.Component {
 
   render() {
     return (
-      <div className="Calendar">
+      <div className="calendar">
         <CalendarNav/>
         <CalendarGrid dates={this.state.dates}/>
       </div>
