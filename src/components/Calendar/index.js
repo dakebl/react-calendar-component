@@ -34,22 +34,23 @@ class Calendar extends React.Component {
         date: firstDayOfTheMonth.date(),
         week: weekNumber,
         day: firstDayOfTheMonth.day(),
-        inMonth: (firstDayOfTheMonth.format('M') === this.state.current.format('M')) ? 1 : 0,
+        inMonth: (firstDayOfTheMonth.clone().month() === this.state.current.clone().month()) ? 1 : 0,
         isToday: (firstDayOfTheMonth.clone().startOf('date').diff(moment().startOf('date')) === 0) ? 1 : 0
       });
       
       firstDayOfTheMonth.add(1, 'days');
     }
+
+    console.log(dates);
     
     this.setState({ dates: dates });
   }
-
 
   render() {
     return (
       <div className="Calendar">
         <CalendarNav/>
-        <CalendarGrid/>
+        <CalendarGrid dates={this.state.dates}/>
       </div>
     );
   }
