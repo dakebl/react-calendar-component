@@ -2,6 +2,7 @@
   "name": "react-calendar-component",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://dakebl.github.io/react-calendar-component",
   "dependencies": {
     "font-awesome": "^4.7.0",
     "moment": "^2.18.1",
@@ -15,11 +16,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
+    "gh-pages": "^1.0.0",
     "react-test-renderer": "^16.0.0"
   }
 }
