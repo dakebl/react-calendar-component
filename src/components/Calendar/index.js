@@ -16,7 +16,6 @@ class Calendar extends React.Component {
       current: moment(),
       dates: []
     };
-
   }
 
   componentWillMount() {  
@@ -42,16 +41,60 @@ class Calendar extends React.Component {
       
       firstDayOfTheMonth.add(1, 'days');
     }
-
-    console.log(dates);
     
     this.setState({ dates: dates });
+  }
+  
+  setUrl(date) {
+    let year  = date.format(`YYYY`);
+    let month = date.format(`MM`);
+    let url = `/${year}/${month}`;
+    this.props.history.push(url);
+  }
+
+  updateMonthView(newMonth) {
+    this.setState({ current: newMonth }); 
+    this.setUrl(newMonth);
+    this.generateGrid();
+  }
+
+  incrementMonth() {
+    let newMonth = this.state.current.add(1,'month');
+    this.updateMonthView(newMonth);
+  }
+
+  decrementMonth() {
+    let newMonth = this.state.current.subtract(1,'month');
+    this.updateMonthView(newMonth);
+  }
+
+  currentDate() {
+    let today = this.state.current.year(this.state.today.year()).dayOfYear(this.state.today.dayOfYear());
+    this.updateMonthView(today);   
+  }
+
+  changeMonth(month) {
+    let newMonth = this.state.current.month(month-1);
+    this.setState({ current: newMonth });  
+    this.setUrl(newMonth);
+    this.generateGrid();
+  }
+
+  changeYear(year) {
+    let newYear = this.state.current.year(year);
+    this.updateMonthView(newYear);
   }
 
   render() {
     return (
       <div className="calendar">
-        <CalendarNav/>
+        <CalendarNav
+          current={ this.state.current }
+          decrementMonth={ this.decrementMonth }
+          incrementMonth={ this.incrementMonth }
+          changeMonth={ this.changeMonth }
+          changeYear={ this.changeYear }
+        />
         <CalendarGrid dates={this.state.dates}/>
       </div>
     );
